@@ -7,23 +7,58 @@ This file creates your application.
 
 from app import app
 from flask import render_template, request, redirect, url_for, flash
-
+from app import mail
+from flask_mail import Mail,Message
+from app.forms import ContactForm
 
 ###
 # Routing for your application.
 ###
+
 
 @app.route('/')
 def home():
     """Render website's home page."""
     return render_template('home.html')
 
-
+# print(fdfv)
 @app.route('/about/')
 def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
 
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    form = ContactForm()
+    if request.method == "POST":
+
+        if form.validate_on_submit():
+
+            try:
+
+                SUBJECT = request.form['subject']
+                NAME = request.form['name']
+                EMAIL = request.form['email']
+                MESSAGE = request.form['message']
+
+                msg = Message(SUBJECT, sender=(NAME, EMAIL),recipients=['@inbox.mailtrap.io'])
+                msg.body = MESSAGE
+                mail.send(msg)
+                flash('Youre message was successfully sent')
+                return redirect(url_for('home'))
+            
+            except:
+                flash('Message failed to send')
+                return redirect(url_for('home'))
+
+        else:
+            pass
+    else:
+        pass
+
+    """Render website's contact page."""
+    return render_template('contact.html',form=form)
 
 ###
 # The functions below should be applicable to all Flask apps.

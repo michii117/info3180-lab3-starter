@@ -1,3 +1,33 @@
 body {
     padding-top: 5rem;
+    font-family: -apple-system,BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "NotoSans", sans-serif;
+}
+
+
+strong{
+    color: crimson;
+}
+
+input,textarea {
+    width: 300px;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    filter: drop-shadow(0px 0px 2px #00000055);
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 500px;
+    height: 200px;
+}
+
+button {
+    width: 90px;
+    height: 40px;
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    filter: drop-shadow(2px 4px 6px #00000033);
 }
